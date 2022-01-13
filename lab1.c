@@ -256,4 +256,39 @@ void free_list(struct elt* head)
 
 void draw_me (void)
 {
+
+  int drawing = syscall(fopen, "./drawing.txt", O_WRONLY|O_CREAT, 0777); 
+
+  /*
+  If file can't be opened, then exit
+  */
+  if(drawing < 0) 
+  {
+    return;
+  }
+
+  char str[] = "/\n  SOMETHING /\n";
+
+  int sketch = syscall(fprintf, drawing, str, sizeof(str)-1);
+
+  if(sketch < 0) 
+  {
+    /*
+    Close file, delete, and return
+    */
+    syscall(fclose, drawing);
+    syscall(SYS_unlink, "./drawing.txt");
+    return;
+  } 
+
+  int finishingtouches = syscall(fopen, drawing);
+
+  if(finishingtouches < 0) 
+  {
+    /*
+    If closing file errored
+    */
+    return;
+  }
+
 }
