@@ -21,9 +21,7 @@
  *
  *********************************************************************/
 
-int main() {
-  return 0;
-}
+
 
 /*********************************************************************
  *
@@ -44,50 +42,50 @@ int main() {
 unsigned long byte_sort (unsigned long arg)
 {
 
-/*
-Setup
-*/
-  unsigned long bytes[8];
-  int i;
-  unsigned long temp = 0x00000000000000ff; 
+    /*
+    Setup
+    */
+    unsigned long bytes[8];
+    int i;
+    unsigned long temp = 0x00000000000000ff; 
 
-  /*
-  Each byte goes into an array of size 8 (byte-sized)
-  */
-  for(i = 0; i < 8; i++) 
-  {
-    bytes[i] = arg & temp;
-    arg = arg >> 8; 
-  } 
-
-  /*
-  Now sort the byte of 8 array we just created
-  */
-  for(i = 0; i < 8; i++) 
-  {
-    int minIndex = i;
-
-    for(int j = i; j < 8; j++) 
+    /*
+    Each byte goes into an array of size 8 (byte-sized)
+    */
+    for(i = 0; i < 8; i++) 
     {
-      if(bytes[j] <= bytes[minIndex]) 
-      {
-        minIndex = j; 
-      }
+        bytes[i] = arg & temp;
+        arg = arg >> 8; 
+    } 
+
+    /*
+    Now sort the byte of 8 array we just created
+    */
+    for(i = 0; i < 8; i++) 
+    {
+        int minIndex = i;
+
+        for(int j = i; j < 8; j++) 
+        {
+            if(bytes[j] <= bytes[minIndex]) 
+            {
+                minIndex = j; 
+            }
+        }
+
+        int tempBytes = bytes[i];
+        bytes[i] = bytes[minIndex];
+        bytes[minIndex] = tempBytes;
     }
 
-    int tempBytes = bytes[i];
-    bytes[i] = bytes[minIndex];
-    bytes[minIndex] = tempBytes;
-  }
+    unsigned long answer = 0; 
 
-  unsigned long answer = 0; 
+    for(i = 0; i < 8; i++) 
+    {
+        answer = answer | (bytes[i] << 8 * i);
+    }
 
-  for(i = 0; i < 8; i++) 
-  {
-    answer = answer | (bytes[i] << 8 * i);
-  }
-
-  return answer; 
+    return answer; 
 
 }
 
@@ -109,42 +107,42 @@ Setup
 
 unsigned long nibble_sort (unsigned long arg)
 {
-  
-  /*
-  Setup
-  */
-  unsigned long bytes[16];
-  int i;
-  unsigned long temp = 0x000000000000000f;
 
-  /*
-  Place each byte into an array of size 8
-  */
- for(i = 0; i < 16; i++) 
- {
-   int minIndex = i;
+    /*
+    Setup
+    */
+    unsigned long nibble[16];
+    int i;
+    unsigned long temp = 0x000000000000000f;
 
-   for(int j = i; j < 16; j++) 
-   {
-     if(bytes[j] <= bytes[minIndex]) 
-     {
-       minIndex = j;
-     }
-   }
+    /*
+    Place each byte into an array of size 8
+    */
+    for(i = 0; i < 16; i++) 
+    {
+        int minIndex = i;
 
-   int tempBytes = bytes[i];
-   bytes[i] = bytes[minIndex];
-   bytes[minIndex] = tempBytes;
- }
+        for(int j = i; j < 16; j++) 
+        {
+            if(nibble[j] <= nibble[minIndex]) 
+            {
+            minIndex = j;
+            }
+        }
 
- unsigned long answer = 0;
+        int tempBytes = nibble[i];
+        nibble[i] = nibble[minIndex];
+        nibble[minIndex] = tempBytes;
+    }
 
- for(i = 0; i < 16; i++) 
- {
-   answer = answer | bytes[i] << 4 * i;
- }
+    unsigned long answer = 0;
 
- return answer; 
+    for(i = 0; i < 16; i++) 
+    {
+        answer = answer | nibble[i] << 4 * i;
+    }
+
+    return answer; 
 
 }
 
@@ -177,73 +175,73 @@ unsigned long nibble_sort (unsigned long arg)
  *********************************************************************/
 
 struct elt {
-  char value;
-  struct elt *link;
+    char value;
+    struct elt *link;
 };
 
 void free_list(struct elt* head); /*so you can call free_list in name_list if you'd like*/
 
 struct elt *name_list (void)
 {
-  char name[] = "Polina";
-  struct elt *current = NULL;
-  struct elt *head = NULL;
-  struct elt *previous = NULL;
+    char name[] = "Polina";
+    struct elt *current = NULL;
+    struct elt *head = NULL;
+    struct elt *previous = NULL;
 
-  head = (struct elt*) malloc(sizeof(struct elt));
+    head = (struct elt*) malloc(sizeof(struct elt));
 
-  /*
-  If call to malloc() fails, returns NULL
-  */
- if(head == NULL) 
- {
-   return NULL;
- }
+    /*
+    If call to malloc() fails, returns NULL
+    */
+    if(head == NULL) 
+    {
+        return NULL;
+    }
 
- head -> value = name[0];
- previous = head;
- int i;
+    head -> value = name[0];
+    previous = head;
+    int i;
 
- for(i = 1; i < 6; i++) 
- {
-  current = (struct elt*) malloc(sizeof(struct elt));
+    for(i = 1; i < 6; i++) 
+    {
+        current = (struct elt*) malloc(sizeof(struct elt));
 
-  /*
-  If call to malloc() fails, returns NULL
-  */
-  if(current == NULL) 
-  {
-    free_list(head);
-    return NULL;
-  }
+        /*
+        If call to malloc() fails, returns NULL
+        */
+        if(current == NULL) 
+        {
+            free_list(head);
+            return NULL;
+        }
 
-  current -> value = name[i];
+        current -> value = name[i];
 
-  if(previous != NULL) 
-  {
-    previous -> link = current;
-  }
+        if(previous != NULL) 
+        {
+            previous -> link = current;
+        }
 
-  previous = current;
- }
+        previous = current;
+    }
 
- return head;
-}
+        return head;
+    }
 
-void print_list(struct elt* head){
+    void print_list(struct elt* head){
 
-}
+    }
 
-void free_list(struct elt* head)
-{
-  struct elt *next;
+    void free_list(struct elt* head)
+    {
+        struct elt *next;
 
-  while(head != NULL) 
-  {
-    next = head->link;
-    free(head);
-    head = next;
-  }
+        while(head != NULL) 
+        {
+            next = head->link;
+            free(head);
+            head = next;
+        }
 }
 
 
@@ -263,45 +261,80 @@ void free_list(struct elt* head)
 void draw_me (void)
 {
 
-  FILE * me; 
+    FILE * me; 
 
-  me = fopen("./me.txt", "w"); 
+    me = fopen("./me.txt", "w"); 
 
-  fprintf(me, "/\n SOMETHING /\n");
+    fprintf(me, "/\n SOMETHING /\n");
 
-  fclose(me);
+    fclose(me);
 
-  return(0); 
+    // /*
+    // If file can't be opened, then exit
+    // */
+    // if(me < 0) 
+    // {
+    //   return;
+    // }
 
-  // /*
-  // If file can't be opened, then exit
-  // */
-  // if(me < 0) 
-  // {
-  //   return;
-  // }
+    // char str[] = "/\n  SOMETHING /\n";
 
-  // char str[] = "/\n  SOMETHING /\n";
+    // int sketch = me(fprintf, str, sizeof(str)-1);
 
-  // int sketch = me(fprintf, str, sizeof(str)-1);
+    // if(sketch < 0) 
+    // {
+    //   /*
+    //   Close file, delete, and return
+    //   */
+    //   fclose(me);
+    //   return(0);
+    // } 
 
-  // if(sketch < 0) 
-  // {
-  //   /*
-  //   Close file, delete, and return
-  //   */
-  //   fclose(me);
-  //   return(0);
-  // } 
+    // int finishingtouches = syscall(fopen, me);
 
-  // int finishingtouches = syscall(fopen, me);
+    // if(finishingtouches < 0) 
+    // {
+    //   /*
+    //   If closing file errored
+    //   */
+    //   return;
+    // }
 
-  // if(finishingtouches < 0) 
-  // {
-  //   /*
-  //   If closing file errored
-  //   */
-  //   return;
-  // }
+}
+
+
+/*********************************************************************
+ *
+ * Testing main()
+ *
+ *********************************************************************/
+
+int main(int argc, char const *argv[])
+{
+
+    /*
+    byte_sort()
+    */
+    unsigned long answer = byte_sort(0x0403deadbeef0201); 
+    printf("byte_sort: 0x%lx\n", answer);
+    // byte_sort(0x0403deadbeef0201);
+
+    /*
+    nibble_sort()
+    */
+    answer = nibble_sort(0x0403deadbeef0201); 
+    printf("nibble_sort 0x%lx\n", answer);
+    // byte_sort(0x0403deadbeef0201);
+
+    /*
+    name_list()
+    */
+
+
+    /*
+    draw_me()
+    */
+   draw_me();
+   printf("Got to 4");
 
 }
