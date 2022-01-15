@@ -269,37 +269,6 @@ void draw_me (void)
 
     fclose(me);
 
-    // /*
-    // If file can't be opened, then exit
-    // */
-    // if(me < 0) 
-    // {
-    //   return;
-    // }
-
-    // char str[] = "/\n  SOMETHING /\n";
-
-    // int sketch = me(fprintf, str, sizeof(str)-1);
-
-    // if(sketch < 0) 
-    // {
-    //   /*
-    //   Close file, delete, and return
-    //   */
-    //   fclose(me);
-    //   return(0);
-    // } 
-
-    // int finishingtouches = syscall(fopen, me);
-
-    // if(finishingtouches < 0) 
-    // {
-    //   /*
-    //   If closing file errored
-    //   */
-    //   return;
-    // }
-
 }
 
 
