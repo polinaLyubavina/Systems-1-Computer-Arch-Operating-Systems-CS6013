@@ -44,6 +44,9 @@ int main() {
 unsigned long byte_sort (unsigned long arg)
 {
 
+/*
+Setup
+*/
   unsigned long bytes[8];
   int i;
   unsigned long temp = 0x00000000000000ff; 
@@ -107,6 +110,9 @@ unsigned long byte_sort (unsigned long arg)
 unsigned long nibble_sort (unsigned long arg)
 {
   
+  /*
+  Setup
+  */
   unsigned long bytes[16];
   int i;
   unsigned long temp = 0x000000000000000f;
@@ -257,38 +263,45 @@ void free_list(struct elt* head)
 void draw_me (void)
 {
 
-  int drawing = syscall(fopen, "./drawing.txt", O_WRONLY|O_CREAT, 0777); 
+  FILE * me; 
 
-  /*
-  If file can't be opened, then exit
-  */
-  if(drawing < 0) 
-  {
-    return;
-  }
+  me = fopen("./me.txt", "w"); 
 
-  char str[] = "/\n  SOMETHING /\n";
+  fprintf(me, "/\n SOMETHING /\n");
 
-  int sketch = syscall(fprintf, drawing, str, sizeof(str)-1);
+  fclose(me);
 
-  if(sketch < 0) 
-  {
-    /*
-    Close file, delete, and return
-    */
-    syscall(fclose, drawing);
-    syscall(SYS_unlink, "./drawing.txt");
-    return;
-  } 
+  return(0); 
 
-  int finishingtouches = syscall(fopen, drawing);
+  // /*
+  // If file can't be opened, then exit
+  // */
+  // if(me < 0) 
+  // {
+  //   return;
+  // }
 
-  if(finishingtouches < 0) 
-  {
-    /*
-    If closing file errored
-    */
-    return;
-  }
+  // char str[] = "/\n  SOMETHING /\n";
+
+  // int sketch = me(fprintf, str, sizeof(str)-1);
+
+  // if(sketch < 0) 
+  // {
+  //   /*
+  //   Close file, delete, and return
+  //   */
+  //   fclose(me);
+  //   return(0);
+  // } 
+
+  // int finishingtouches = syscall(fopen, me);
+
+  // if(finishingtouches < 0) 
+  // {
+  //   /*
+  //   If closing file errored
+  //   */
+  //   return;
+  // }
 
 }
