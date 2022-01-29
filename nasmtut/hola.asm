@@ -1,16 +1,19 @@
 ; ----------------------------------------------------------------------------------------
-; Writes "Hola, mundo" to the console using a C library. Runs on Linux.
+; This is an macOS console program that writes "Hola, mundo" on one line and then exits.
+; It uses puts from the C library.  To assemble and run:
 ;
-;     nasm -felf64 hola.asm && gcc hola.o && ./a.out
+;     nasm -fmacho64 hola.asm && gcc hola.o && ./a.out
 ; ----------------------------------------------------------------------------------------
 
-          global    main
-          extern    puts
+          global    _main
+          extern    _puts
 
           section   .text
-main:                                       ; This is called by the C library startup code
-          mov       rdi, message            ; First integer (or pointer) argument in rdi
-          call      puts                    ; puts(message)
-          ret                               ; Return from main back into C library wrapper
-message:
-          db        "Hola, mundo", 0        ; Note strings must be terminated with 0 in C
+_main:    push      rbx                     ; Call stack must be aligned
+          lea       rdi, [rel message]      ; First argument is address of message
+          call      _puts                   ; puts(message)
+          pop       rbx                     ; Fix up stack before returning
+          ret
+
+          section   .data
+message:  db        "Hola, mundo", 0        ; C strings need a zero byte at the end
