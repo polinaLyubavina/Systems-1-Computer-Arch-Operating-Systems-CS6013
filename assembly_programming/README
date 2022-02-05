@@ -1,0 +1,2 @@
+On Linux, to compile and run use the following command:
+`nasm -felf64 myAsm.s && g++ -c main.cpp && g++ -o mySyscallProgram main.o myAsm.o && ./mySyscallProgram`
