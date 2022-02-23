@@ -1,0 +1,42 @@
+elf file - describes how to create a process for execution (at runtime).
+
+thrashing - takes place when computer's virtual memory resources (pages) are overused. The computer begins going between different pages, and can either come toa halt or be very slow.
+
+virtual - a digital replication/abstraction of computer's resources, such as CPU. Abstraction allows for better program security and management by the OS as each program believes to have the sole use of the abstracted resouces when in reality it does not.
+
+memory - stores information for immediate use in hardware or software
+
+address space - range of discrete addresses that can be used by the OS, software or hardware to store data
+
+machine - performs computations, has components like kernel and CPU
+
+time sharing - multiprogramming or multi-tasking computer that shares resources among different processes simultaneously 
+
+analog vs discreet - Analog: old, limited in accuracy and computing operates on continuously changing physical quantities. Digital: use binary, with input, processing and output, have more accuracy.
+
+OS vs kernel - OS: software that interfaces between user and computer, makes certain computing decisions, such as when to switch between processes or give power to the kernel. Kernel: core of the OS, converts user commands into machine language.
+
+von Neumann - (don't mispronounce!!) von Neumann's computer model stores computer intructions data nad program data in the same memory. Consists of: Control unit, arithmetic, logical memory unit, registers and I/O
+
+integrated circuit - a processor, such as CPU or GPU
+
+FSA - abstract machine in a model of computation.  
+
+privilege level - the privilege level of a hardware or program determines what a program or user can or cannot do on a machine. For example, administrative privileges will allow you to do more extensive operations on the machine. 
+
+context switch - used by a multitasking operating system. The os saves information/data/thread from the process it's currently running and switches to running a different process before switching back to the first process.
+
+lazy loading - improves efficiency of operation of a program by loading objects/data as they are needed instead of loading all at once.
+
+PID - uniquely identifies an active process (by an os)
+
+DMA - certain hardware can access a computer's memory independently of the CPU because it can process the data itself and doesn't need to wait for the CPU to be free to do so
+
+MMU - memory management unit, on the chip. Handles putting data into memory.
+TLB - translation lookaside buffer. TLB is a memory cache that reduces time taken to access user memory location. Closest cache to the processor. Recent translations of virtual memory to physical memory.
+
+daemon - program/process that runs in the background
+
+symbol - primitive data type whose instances have a unique human-readable form
+
+shared library - linked dynamically and store common code that can be accessed and used by any application
